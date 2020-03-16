@@ -12,6 +12,8 @@ public class InputData extends AppCompatActivity {
 
     private EditText edtNama, edtJurusan, edtAngkatan, edtAlamat, edtNoHp;
     private AppCompatButton btnSimpan;
+    private int id;
+    private boolean edit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,6 +27,22 @@ public class InputData extends AppCompatActivity {
         edtNoHp = findViewById(R.id.edt_nomo_hp);
         btnSimpan = findViewById(R.id.btn_simpan);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            if (bundle.containsKey("edit")) {
+                if (bundle.getBoolean("edit")) {
+                    edit = true;
+                    Mahasiswa mahasiswa = MainApplication.getDb().mahasiswaDao().getMahasiswaById(bundle.getInt("id"));
+                    edtNama.setText(mahasiswa.getNama());
+                    edtJurusan.setText(mahasiswa.getNama());
+                    edtAngkatan.setText(mahasiswa.getAngkatan());
+                    edtAlamat.setText(mahasiswa.getAlamat());
+                    edtNoHp.setText(mahasiswa.getNomorHp());
+                    id = mahasiswa.getId();
+                }
+            }
+        }
+
         btnSimpan.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -37,7 +55,12 @@ public class InputData extends AppCompatActivity {
                             edtAlamat.getText().toString(),
                             edtNoHp.getText().toString()
                     );
-                    MainApplication.getDb().mahasiswaDao().insertAll(mahasiswa);
+                    if (edit) {
+                        mahasiswa.setId(id);
+                        MainApplication.getDb().mahasiswaDao().update(mahasiswa);
+                    } else {
+                        MainApplication.getDb().mahasiswaDao().insertAll(mahasiswa);
+                    }
                     setResult(RESULT_OK);
                     finish();
                 }
