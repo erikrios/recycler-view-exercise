@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -23,9 +24,14 @@ public interface MahasiswaDao {
     Mahasiswa findByName(String nama);
 
     @Insert
-    void insertAll(Mahasiswa... mahasiswas);
+    void insertAll(Mahasiswa... mahasiswa);
 
     @Delete
     void delete(Mahasiswa mahasiswa);
 
+    @Query("SELECT * FROM mahasiswa WHERE id = :id")
+    Mahasiswa getMahasiswaById(int id);
+
+    @Update()
+    void update(Mahasiswa... mahasiswa);
 }
