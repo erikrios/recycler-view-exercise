@@ -11,6 +11,9 @@ public class Mahasiswa {
     @ColumnInfo(name = "id")
     private int id;
 
+    @ColumnInfo(name = "nama")
+    private String nama;
+
     @ColumnInfo(name = "jurusan")
     private String jurusan;
 
@@ -23,8 +26,8 @@ public class Mahasiswa {
     @ColumnInfo(name = "nomor_hp")
     private String nomorHp;
 
-    public Mahasiswa(int id, String jurusan, int angkatan, String alamat, String nomorHp) {
-        this.id = id;
+    public Mahasiswa(String nama, String jurusan, int angkatan, String alamat, String nomorHp) {
+        this.nama = nama;
         this.jurusan = jurusan;
         this.angkatan = angkatan;
         this.alamat = alamat;
@@ -37,6 +40,14 @@ public class Mahasiswa {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public String getJurusan() {
