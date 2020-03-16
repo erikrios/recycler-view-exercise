@@ -2,8 +2,10 @@ package com.erikriosetiawan.recyclerviewexercise;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +40,8 @@ public class HalamanAwal extends AppCompatActivity {
                 startActivityForResult(new Intent(HalamanAwal.this, InputData.class), KODE_INPUT_DATA);
             }
         });
+
+        registerForContextMenu(recyclerView);
     }
 
     @Override
@@ -49,5 +53,21 @@ public class HalamanAwal extends AppCompatActivity {
                 adapter.addAll(dataMahasiswa);
             }
         }
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+                startActivityForResult(new Intent(HalamanAwal.this, InputData.class)
+                        .putExtra("edit", true)
+                        .putExtra("id", adapter.getMahasiswa(adapter.getPosition()).getId()), KODE_INPUT_DATA);
+                break;
+            case 2:
+                MainApplication.getDb().mahasiswaDao().delete(adapter.getMahasiswa(item.getOrder()));
+                adapter.deleteMahasiswa(adapter.getPosition());
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 }
