@@ -10,4 +10,13 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="workshop_android">Workshop Android</string>
+    <string name="nama">Nama</string>
+    <string name="jurusan">Jurusan</string>
+    <string name="teknik_informatika">Teknik Informatika</string>
+    <string name="angkatan">Angkatan</string>
+    <string name="year">2015</string>
+    <string name="alamat">Alamat</string>
+    <string name="ponorogo">Ponorogo</string>
+    <string name="nomor_telepon">Nomor Telepon</string>
+    <string name="_083854050592">083854050592</string>
 </resources>
